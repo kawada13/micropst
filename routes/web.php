@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $name = app()->make('myName');
+    // dd($name);
+    return view('welcome',
+        [
+            'name' => $name,
+        ]);
+
 });
 
 
