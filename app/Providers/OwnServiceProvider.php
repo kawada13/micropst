@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 class OwnServiceProvider extends ServiceProvider
 {
+    
     /**
      * Register services.
      *
