@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $name = app()->make('myName');
-    // dd($name);
-    return view('welcome',
-        [
-            'name' => $name,
-        ]);
+    return view('welcome');
+})->name('top');
 
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 });
+
 
 
 // Auth::routes();
