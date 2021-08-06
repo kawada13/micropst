@@ -2,6 +2,9 @@
 
 @section('content')
     <div class="row">
+
+
+
         <aside class="col-sm-4">
             <div class="card">
                 <div class="card-header">
@@ -13,6 +16,9 @@
             </div>
             @include('user_follow.follow_button', ['user' => $user])
         </aside>
+
+
+
         <div class="col-sm-8">
             @include('users.navtabs', ['user' => $user])
             @if (Auth::id() == $user->id)
@@ -29,5 +35,7 @@
                 @include('microposts.microposts', ['microposts' => $microposts])
             @endif
         </div>
+
+        
     </div>
 @endsection

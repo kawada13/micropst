@@ -59,6 +59,12 @@ class User extends Authenticatable
     }
 
 
+    public function favorites()
+    {
+        return $this->belongsToMany(Micropost::class, 'favorites', 'user_id', 'micropost_id')->withTimestamps();
+    }
+
+
 
 
     public function follow($userId)
@@ -99,6 +105,44 @@ class User extends Authenticatable
     {
         return $this->followings()->where('follow_id', $userId)->exists();
     }
+
+    public function favorite($micropostsId)
+    {
+        // 既にお気に入りしているかどうかかの確認
+        $exist = $this->is_favoriting($micropostsId);
+
+        if ($exist) {
+            // 既にお気に入りしていれば何もしない
+            return false;
+        } else {
+            // 未お気にりであればお気に入りする
+            $this->favorites()->attach($micropostsId);
+            return true;
+        }
+    }
+
+    public function unfavorite($micropostsId)
+    {
+       // 既にお気に入りしているかどうかかの確認
+       $exist = $this->is_favoriting($micropostsId);
+
+
+        if ($exist) {
+            // 既にお気に入りしていればお気に入りを外す
+            $this->favorites()->detach($micropostsId);
+            return true;
+        } else {
+            // 未フォローであれば何もしない
+            return false;
+        }
+    }
+
+    public function is_favoriting($micropostsId)
+    {
+        return $this->favorites()->where('micropost_id', $micropostsId)->exists();
+    }
+
+
 
 
 }
