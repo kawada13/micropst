@@ -67,7 +67,7 @@ class UsersController extends Controller
 
         return view('users.followers', $data);
     }
-    
+
 
     public function favorites($id)
     {
@@ -82,5 +82,11 @@ class UsersController extends Controller
         $data += $this->counts($user);
 
         return view('users.favorites', $data);
+    }
+
+    public function aa() {
+        $user = User::find(1);
+
+        return view('users.aa', ['user' => $user]);
     }
 }

@@ -20,7 +20,12 @@
 
 
         <div class="col-sm-8">
+
+
             @include('users.navtabs', ['user' => $user])
+
+
+
             @if (Auth::id() == $user->id)
             <form class="mb-4" method="post" action="{{ route('microposts.store') }}">
             @csrf
@@ -31,9 +36,15 @@
               <button type="submit" class="btn btn-primary">投稿する</button>
             </form>
             @endif
+
+
+
+
             @if (count($microposts) > 0)
                 @include('microposts.microposts', ['microposts' => $microposts])
             @endif
+
+            
         </div>
 
         
